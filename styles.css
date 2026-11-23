@@ -87,17 +87,3 @@ footer { display: flex; justify-content: space-between; padding: 20px 0; border-
   .rocket-track { height: 100px; }
   footer { gap: 12px; flex-wrap: wrap; }
 }
-
-
-/* Iteración 2: panel de explicación y respuesta correcta */
-.explanation-card { margin-top: 20px; padding: 18px; border: 1px solid #55f3e577; background: #071329; animation: appear .25s ease; }
-.explanation-card[hidden] { display: none; }
-.explanation-label { color: var(--cyan); font-size: 9px; letter-spacing: 1.7px; font-weight: 700; }
-.answer-reveal { color: var(--yellow); font-size: 12px; line-height: 1.6; }
-.answer-reveal strong { color: var(--white); }
-.explanation-text { color: #c3cbe4; font-size: 12px; line-height: 1.8; }
-.formula-box { display: grid; gap: 8px; border-left: 2px solid var(--pink); padding: 9px 12px; margin: 14px 0 18px; background: #ff5e9c0c; }
-.formula-box span { color: var(--muted); font-size: 9px; letter-spacing: 1.2px; }
-.formula-box strong { color: var(--cyan); font-size: 13px; line-height: 1.5; }
-.next-btn { width: 100%; }
-.next-btn[hidden] { display: none; }
