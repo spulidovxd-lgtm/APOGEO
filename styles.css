@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&display=swap');
+
+:root {
+  --bg: #080d24; --panel: #101a39; --line: #28365f; --cyan: #55f3e5;
+  --pink: #ff5e9c; --white: #f4f5ff; --muted: #9ba8ce; --yellow: #ffd66b;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; color: var(--white); background:
+  radial-gradient(ellipse at 50% 15%, #1b2851 0%, var(--bg) 58%);
+  font-family: 'IBM Plex Mono', monospace; overflow-x: hidden;
+}
+.stars { position: fixed; inset: 0; pointer-events: none; opacity: .35; z-index: -1;
+  background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+  radial-gradient(1px 1px at 80px 120px, #fff, transparent),
+  radial-gradient(2px 2px at 160px 70px, #8cecff, transparent);
+  background-size: 210px 180px;
+}
+.app { width: min(100% - 36px, 1000px); margin: auto; min-height: 100vh; display: flex; flex-direction: column; }
+.topbar { height: 76px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ffffff20; }
+.brand { color: var(--cyan); text-decoration: none; font: 800 21px Orbitron, sans-serif; letter-spacing: 2px; }
+.edition, .small-note, footer { color: var(--muted); font-size: 10px; letter-spacing: 1.5px; }
+.screen { display: none; flex: 1; padding: 52px 0 36px; }
+.screen.active { display: block; animation: appear .35s ease; }
+@keyframes appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.hero { position: relative; padding: 25px 0 42px; max-width: 680px; }
+.eyebrow { color: var(--pink); font-size: 11px; letter-spacing: 2px; font-weight: 700; }
+h1, h2, h3 { font-family: Orbitron, sans-serif; }
+h1 { font-size: clamp(36px, 7vw, 66px); line-height: 1.13; letter-spacing: -2px; margin: 22px 0; }
+h1 span, .result-title span { color: var(--cyan); }
+.intro { max-width: 500px; color: #c3cbe4; line-height: 1.8; font-size: 14px; }
+.rocket-art { position: absolute; right: 8%; top: 90px; font-size: clamp(64px, 12vw, 115px); filter: drop-shadow(0 0 24px #55f3e555); transform: rotate(-12deg); }
+.primary-btn { background: var(--cyan); color: #071126; border: 0; padding: 17px 22px; font: 700 12px 'IBM Plex Mono'; letter-spacing: 1px; cursor: pointer; transition: .2s; }
+.primary-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 30px #55f3e533; }
+.primary-btn span { margin-left: 20px; }
+.small-note { margin-top: 17px; }
+.mission-card { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; border: 1px solid var(--line); background: #101a3980; padding: 20px; }
+.mission-card div { display: grid; gap: 9px; }
+.card-label, .telemetry-title, .altitude span, .score-line span { color: var(--muted); font-size: 9px; letter-spacing: 1.5px; }
+.mission-card strong { font: 600 12px Orbitron; }
+.game-heading { display: flex; justify-content: space-between; align-items: center; }
+.game-heading h2 { font-size: clamp(23px, 4vw, 34px); margin: 8px 0 18px; }
+.game-heading h2 span { color: var(--cyan); }
+.game-heading h2 small { color: var(--muted); font-size: 13px; }
+.timer { text-align: center; border: 1px solid var(--pink); padding: 9px 18px; min-width: 75px; }
+.timer span { display: block; color: var(--pink); font-size: 9px; letter-spacing: 1px; }
+.timer strong { font: 700 25px Orbitron; }
+.progress-track { height: 5px; background: #263252; margin: 5px 0 28px; }
+.progress-fill { height: 100%; width: 0%; background: var(--cyan); transition: width .3s; }
+.game-grid { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 18px; }
+.question-panel, .telemetry { border: 1px solid var(--line); background: #101a39dd; padding: 25px; }
+.topic-tag { display: inline-block; color: var(--yellow); border: 1px solid #ffd66b66; padding: 6px 9px; font-size: 9px; letter-spacing: 1.5px; }
+.question-panel h3 { font-size: clamp(19px, 3vw, 26px); line-height: 1.5; margin: 18px 0; }
+.answer-hint { color: var(--muted); font-size: 11px; line-height: 1.6; }
+input { width: 100%; margin: 16px 0 12px; padding: 16px; color: white; background: #080f29; border: 1px solid #394a78; font: 14px 'IBM Plex Mono'; outline: none; }
+input:focus { border-color: var(--cyan); }
+.submit-btn { width: 100%; }
+.feedback { min-height: 24px; font-size: 12px; line-height: 1.5; }
+.feedback.good { color: var(--cyan); } .feedback.bad { color: var(--pink); }
+.telemetry { min-height: 340px; position: relative; }
+.altitude { margin-top: 24px; display: grid; gap: 8px; }
+.altitude strong { font: 700 28px Orbitron; color: var(--cyan); }
+.altitude small { font-size: 11px; color: var(--muted); }
+.rocket-track { height: 170px; margin: 14px 0; position: relative; border-left: 1px dashed #61729c; }
+.earth { position: absolute; bottom: 0; left: -13px; font-size: 24px; }
+.rocket { position: absolute; bottom: 15px; left: -11px; font-size: 23px; transition: bottom .7s cubic-bezier(.2,.8,.2,1); }
+.orbit-label { position: absolute; top: 10px; left: 12px; color: #65749d; font-size: 9px; }
+.score-line { display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 14px; }
+.score-line strong { color: var(--yellow); font: 700 17px Orbitron; }
+.result-title { font-size: clamp(38px, 7vw, 66px); line-height: 1.1; margin: 25px 0; }
+.final-altitude { border: 1px solid var(--cyan); padding: 22px; display: grid; gap: 12px; max-width: 500px; }
+.final-altitude span, .result-stats span { color: var(--muted); font-size: 10px; letter-spacing: 1px; }
+.final-altitude strong { color: var(--cyan); font: 700 34px Orbitron; }
+.result-stats { display: flex; gap: 35px; margin: 24px 0; flex-wrap: wrap; }
+.result-stats div { display: grid; gap: 8px; }
+.result-stats strong { font: 600 19px Orbitron; }
+.result-message { color: var(--muted); margin-bottom: 25px; }
+footer { display: flex; justify-content: space-between; padding: 20px 0; border-top: 1px solid #ffffff20; font-size: 9px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 700px) {
+  .edition { font-size: 8px; text-align: right; }
+  .screen { padding-top: 30px; }
+  .rocket-art { opacity: .22; right: 2%; top: 110px; }
+  .mission-card { grid-template-columns: 1fr; }
+  .game-grid { grid-template-columns: 1fr; }
+  .telemetry { min-height: 0; }
+  .rocket-track { height: 100px; }
+  footer { gap: 12px; flex-wrap: wrap; }
+}

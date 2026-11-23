@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d24">
+  <title>APOGEO — Misión diaria</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="APOGEO inicio">✦ APOGEO</a>
+      <span class="edition">PHYSICS SPACE PROGRAM · 1984</span>
+    </header>
+
+    <section id="home" class="screen active">
+      <div class="hero">
+        <p class="eyebrow">PROGRAMA DE EXPLORACIÓN FÍSICA</p>
+        <h1>LAS RESPUESTAS<br><span>RARAS LLEGAN</span><br> MÁS ALTO.</h1>
+        <p class="intro">Resuelve los 7 desafíos de hoy. Cada respuesta correcta impulsa a ARIEL-1 hacia el espacio.</p>
+        <div class="rocket-art" aria-hidden="true">🚀</div>
+        <button id="startBtn" class="primary-btn">INICIAR MISIÓN <span>→</span></button>
+        <p class="small-note">7 DESAFÍOS · 25 SEGUNDOS CADA UNO · UNA MISIÓN</p>
+      </div>
+      <div class="mission-card">
+        <div><span class="card-label">MISIÓN</span><strong>ARIEL-1 / 001</strong></div>
+        <div><span class="card-label">OBJETIVO</span><strong>700 KM</strong></div>
+        <div><span class="card-label">COMBUSTIBLE</span><strong>CONOCIMIENTO</strong></div>
+      </div>
+    </section>
+
+    <section id="game" class="screen">
+      <div class="game-heading">
+        <div><p class="eyebrow">MISIÓN ARIEL-1</p><h2>DESAFÍO <span id="questionNumber">01</span><small> / 07</small></h2></div>
+        <div class="timer"><span>TIEMPO</span><strong id="timer">25</strong></div>
+      </div>
+      <div class="progress-track"><div id="progressBar" class="progress-fill"></div></div>
+      <div class="game-grid">
+        <article class="question-panel">
+          <p id="topic" class="topic-tag">MECÁNICA</p>
+          <h3 id="questionText">Cargando pregunta...</h3>
+          <p class="answer-hint">Escribe tu respuesta. No necesitas unidades, a menos que la pregunta las pida.</p>
+          <form id="answerForm">
+            <label class="sr-only" for="answerInput">Tu respuesta</label>
+            <input id="answerInput" type="text" placeholder="Escribe tu respuesta..." autocomplete="off" required>
+            <button class="primary-btn submit-btn" type="submit">CONFIRMAR RESPUESTA ↗</button>
+          </form>
+          <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+        </article>
+        <aside class="telemetry">
+          <div class="telemetry-title">TELEMETRÍA</div>
+          <div class="altitude"><span>ALTITUD</span><strong><b id="altitude">0</b><small> KM</small></strong></div>
+          <div class="rocket-track"><div class="earth">🌍</div><div id="rocket" class="rocket">🚀</div><div class="orbit-label">ÓRBITA</div></div>
+          <div class="score-line"><span>PUNTOS</span><strong id="score">000</strong></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="results" class="screen">
+      <p class="eyebrow">REPORTE DE MISIÓN · ARIEL-1</p>
+      <h2 class="result-title">MISIÓN<br><span>COMPLETADA.</span></h2>
+      <div class="final-altitude"><span>ALTITUD ALCANZADA</span><strong id="finalAltitude">0 KM</strong></div>
+      <div class="result-stats">
+        <div><span>RESPUESTAS CORRECTAS</span><strong id="correctCount">0 / 7</strong></div>
+        <div><span>PUNTAJE TOTAL</span><strong id="finalScore">0</strong></div>
+      </div>
+      <p id="resultMessage" class="result-message">Buen trabajo, explorador.</p>
+      <button id="restartBtn" class="primary-btn">VOLVER A JUGAR ↻</button>
+    </section>
+
+    <footer>APOGEO © 1984–2026 <span>EXPLORA · PIENSA · DESPEGA</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
