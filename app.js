@@ -1,150 +1,56 @@
-// APOGEO — Iteración 1: prototipo funcional.
-// La rareza está preasignada a respuestas de demostración; no representa
-// todavía estadísticas reales de respuestas de una comunidad.
-
-const challenges = [
-  { topic: "MECÁNICA", question: "¿Cómo se llama la energía que tiene un objeto debido a su movimiento?", answers: [
-    { text: "energia cinetica", tier: 2 }, { text: "energía cinética", tier: 2 }, { text: "cinética", tier: 1 }
-  ]},
-  { topic: "FUERZAS", question: "¿Qué fuerza atrae los objetos hacia el centro de la Tierra?", answers: [
-    { text: "gravedad", tier: 2 }, { text: "fuerza gravitacional", tier: 3 }, { text: "gravitacion", tier: 1 }
-  ]},
-  { topic: "MOVIMIENTO", question: "¿Qué magnitud física mide el cambio de velocidad con respecto al tiempo?", answers: [
-    { text: "aceleracion", tier: 2 }, { text: "aceleración", tier: 2 }
-  ]},
-  { topic: "ONDAS", question: "¿Cómo se llama el número de ciclos de una onda por segundo?", answers: [
-    { text: "frecuencia", tier: 2 }, { text: "frecuencia de onda", tier: 3 }
-  ]},
-  { topic: "ELECTRICIDAD", question: "¿Qué unidad se utiliza para medir la resistencia eléctrica?", answers: [
-    { text: "ohmio", tier: 2 }, { text: "ohmios", tier: 2 }, { text: "ohm", tier: 1 }, { text: "omega", tier: 3 }
-  ]},
-  { topic: "ENERGÍA", question: "¿Cómo se llama la energía almacenada debido a la posición o configuración de un objeto?", answers: [
-    { text: "energia potencial", tier: 2 }, { text: "energía potencial", tier: 2 }, { text: "potencial", tier: 1 }
-  ]},
-  { topic: "ASTROFÍSICA", question: "¿Cómo se llama el límite alrededor de un agujero negro a partir del cual nada puede escapar?", answers: [
-    { text: "horizonte de sucesos", tier: 4 }, { text: "horizonte de eventos", tier: 3 }, { text: "horizonte", tier: 1 }
-  ]}
+// APOGEO Iteración 3: ambiente espacial, movimiento del cohete, rangos y logros.
+// La rareza/puntos son valores de juego provisionales, no datos de popularidad real.
+const rarity=[{name:'ÓRBITA BAJA',points:10},{name:'ESTRATOSFERA',points:20},{name:'LÍNEA DE KÁRMÁN',points:30},{name:'ESTACIÓN ESPACIAL',points:50},{name:'SALTO LUNAR',points:80},{name:'SUPERNOVA',points:100}];
+const bank=[
+{topic:'MECÁNICA',q:'¿Cómo se llama la energía que tiene un objeto debido a su movimiento?',a:[['energía cinética',2],['cinética',1],['energia de movimiento',3]],e:'La energía cinética es la energía asociada al movimiento de un cuerpo. Depende de su masa y velocidad.',f:'Ec = ½ · m · v²'},
+{topic:'FUERZAS',q:'¿Qué fuerza atrae los objetos hacia el centro de la Tierra?',a:[['gravedad',2],['fuerza gravitacional',3],['fuerza de gravedad',2]],e:'La gravedad es la interacción atractiva entre cuerpos con masa. Cerca de la Tierra produce g ≈ 9,8 m/s².',f:'Fg = m · g'},
+{topic:'MOVIMIENTO',q:'¿Qué magnitud mide el cambio de velocidad con respecto al tiempo?',a:[['aceleración',2],['tasa de cambio de velocidad',4]],e:'La aceleración indica cuánto cambia la velocidad durante un intervalo de tiempo.',f:'a = Δv / Δt'},
+{topic:'ONDAS',q:'¿Cómo se llama el número de ciclos de una onda por segundo?',a:[['frecuencia',2],['frecuencia de onda',3],['hercios',1],['hertz',1]],e:'La frecuencia indica cuántos ciclos completos ocurren por segundo. Se mide en hercios.',f:'f = 1 / T'},
+{topic:'ELECTRICIDAD',q:'¿Qué unidad se utiliza para medir la resistencia eléctrica?',a:[['ohmio',2],['ohmios',2],['ohm',1]],e:'La resistencia mide la oposición al paso de corriente eléctrica y se expresa en ohmios.',f:'R = V / I'},
+{topic:'ENERGÍA',q:'¿Cómo se llama la energía almacenada debido a la posición o configuración de un objeto?',a:[['energía potencial',2],['potencial gravitatoria',3],['energia almacenada',1]],e:'La energía potencial gravitatoria depende de la masa, la gravedad y la altura respecto a una referencia.',f:'Ep = m · g · h'},
+{topic:'ASTROFÍSICA',q:'¿Cómo se llama el límite alrededor de un agujero negro a partir del cual nada puede escapar?',a:[['horizonte de sucesos',4],['horizonte de eventos',3],['event horizon',5]],e:'El horizonte de sucesos es el límite a partir del cual no pueden escapar señales hacia el exterior.',f:'Concepto: horizonte de sucesos'},
+{topic:'CINEMÁTICA',q:'¿Qué unidad del Sistema Internacional se usa para medir la velocidad?',a:[['metros por segundo',2],['m/s',1],['metro por segundo',2]],e:'La velocidad relaciona el desplazamiento con el tiempo y en SI se expresa en metros por segundo.',f:'v = Δx / Δt'},
+{topic:'DINÁMICA',q:'¿Qué científico formuló las tres leyes clásicas del movimiento?',a:[['isaac newton',2],['newton',1],['sir isaac newton',3]],e:'Isaac Newton formuló tres leyes fundamentales que describen el movimiento y la relación entre fuerza y aceleración.',f:'ΣF = m · a'},
+{topic:'FUERZAS',q:'¿Qué fuerza se opone al movimiento relativo entre superficies en contacto?',a:[['fricción',2],['rozamiento',2],['fuerza de fricción',3]],e:'La fricción actúa paralela a las superficies de contacto y se opone al deslizamiento o su tendencia.',f:'Ff ≈ μ · N'},
+{topic:'MOVIMIENTO',q:'¿Cómo se llama el movimiento circular con rapidez constante?',a:[['movimiento circular uniforme',3],['mcu',1],['circular uniforme',2]],e:'En el MCU la rapidez es constante, aunque la dirección de la velocidad cambia continuamente.',f:'ac = v² / r'},
+{topic:'GRAVITACIÓN',q:'¿Cómo se llama la trayectoria que sigue un objeto alrededor de otro debido a la gravedad?',a:[['órbita',2],['trayectoria orbital',3]],e:'Una órbita es la trayectoria de un cuerpo alrededor de otro por la interacción gravitatoria.',f:'Órbita circular: v = √(GM/r)'},
+{topic:'ONDAS',q:'¿Qué distancia hay entre dos crestas consecutivas de una onda?',a:[['longitud de onda',2],['lambda',3],['λ',1]],e:'La longitud de onda es la distancia entre dos puntos equivalentes consecutivos de una onda.',f:'v = λ · f'},
+{topic:'ONDAS',q:'¿Cómo se llama el tiempo que tarda una onda en completar un ciclo?',a:[['periodo',2],['tiempo de un ciclo',3]],e:'El período es el tiempo de una oscilación completa y es inversamente proporcional a la frecuencia.',f:'T = 1 / f'},
+{topic:'SONIDO',q:'¿El sonido puede propagarse en el vacío? Responde sí o no.',a:[['no',1],['no puede',2],['no, necesita un medio',3]],e:'El sonido es una onda mecánica y necesita un medio material para propagarse.',f:'No se propaga en el vacío ideal'},
+{topic:'ELECTRICIDAD',q:'¿Cómo se llama el flujo ordenado de carga eléctrica?',a:[['corriente eléctrica',2],['corriente',1],['intensidad de corriente',3]],e:'La corriente eléctrica expresa la cantidad de carga que atraviesa una sección por unidad de tiempo.',f:'I = Q / t'},
+{topic:'ELECTRICIDAD',q:'¿Qué unidad se utiliza para medir la corriente eléctrica?',a:[['amperio',2],['amperios',2],['ampere',2]],e:'El amperio es la unidad básica del Sistema Internacional para corriente eléctrica.',f:'1 A = 1 C/s'},
+{topic:'ELECTRICIDAD',q:'¿Qué unidad mide la diferencia de potencial eléctrico?',a:[['voltio',2],['voltios',2],['volt',1]],e:'La diferencia de potencial o voltaje es energía por unidad de carga entre dos puntos.',f:'V = E / Q'},
+{topic:'ENERGÍA',q:'¿Cuál es la unidad de energía en el Sistema Internacional?',a:[['julio',2],['joule',2],['julios',2]],e:'El julio es la unidad de energía y trabajo en el Sistema Internacional.',f:'1 J = 1 N · m'},
+{topic:'TERMODINÁMICA',q:'¿Qué instrumento se utiliza para medir la temperatura?',a:[['termómetro',2],['termometro',2]],e:'Un termómetro mide la temperatura. En el SI, la temperatura se expresa en kelvin.',f:'Unidad SI: kelvin (K)'},
+{topic:'TERMODINÁMICA',q:'¿Cómo se llama la energía transferida por diferencia de temperatura?',a:[['calor',2],['energía térmica transferida',4]],e:'El calor es energía en tránsito debido a una diferencia de temperatura, no una medida de temperatura.',f:'Q = m · c · ΔT'},
+{topic:'FLUIDOS',q:'¿Qué principio dice que una presión aplicada a un fluido encerrado se transmite por el fluido?',a:[['principio de pascal',3],['ley de pascal',2],['pascal',1]],e:'El principio de Pascal establece que un cambio de presión en un fluido confinado se transmite a todo el fluido.',f:'P = F / A'},
+{topic:'FLUIDOS',q:'¿Qué fuerza hacia arriba ejerce un fluido sobre un objeto sumergido?',a:[['empuje',2],['fuerza de empuje',3],['empuje de arquímedes',4]],e:'El empuje es la fuerza ascendente que ejerce un fluido sobre un cuerpo sumergido o flotante.',f:'E = ρ · g · V'},
+{topic:'ÓPTICA',q:'¿Cómo se llama el cambio de dirección de la luz al pasar de un medio a otro?',a:[['refracción',2],['refraccion',2]],e:'La refracción ocurre cuando la luz cambia de velocidad al pasar de un medio a otro y puede cambiar de dirección.',f:'n₁ · sen θ₁ = n₂ · sen θ₂'},
+{topic:'ÓPTICA',q:'¿Cómo se llama el rebote de la luz al chocar con una superficie?',a:[['reflexión',2],['reflexion',2],['reflejo',1]],e:'La reflexión ocurre cuando la luz rebota al llegar a una superficie.',f:'Ángulo de incidencia = ángulo de reflexión'},
+{topic:'MAGNETISMO',q:'¿Qué polos magnéticos se atraen entre sí?',a:[['polos opuestos',2],['norte y sur',2],['polo norte y polo sur',3]],e:'Los polos opuestos se atraen; los polos iguales se repelen.',f:'N ↔ S se atraen'},
+{topic:'FÍSICA MODERNA',q:'¿Cuál es la velocidad aproximada de la luz en el vacío?',a:[['300000 km/s',2],['300 mil kilómetros por segundo',3],['300000000 m/s',3]],e:'La luz en el vacío viaja a cerca de 300.000 km/s, o 3 × 10⁸ m/s.',f:'c ≈ 3,0 × 10⁸ m/s'},
+{topic:'ASTROFÍSICA',q:'¿Cómo se llama la explosión extremadamente energética de ciertas estrellas al final de su evolución?',a:[['supernova',2],['explosión de supernova',3],['super nova',1]],e:'Una supernova es una explosión estelar extremadamente energética en ciertas etapas finales de evolución estelar.',f:'Evento astrofísico de alta energía'},
+{topic:'ASTROFÍSICA',q:'¿Cómo se llama nuestra galaxia?',a:[['vía láctea',2],['via lactea',2],['milky way',3]],e:'La Vía Láctea es la galaxia que contiene nuestro Sistema Solar.',f:'Galaxia espiral barrada'},
+{topic:'ASTROFÍSICA',q:'¿Cómo se llama el punto de una órbita en el que un planeta está más cerca del Sol?',a:[['perihelio',3],['punto más cercano al sol',4],['perihelion',4]],e:'El perihelio es el punto de la órbita de un cuerpo en el que su distancia al Sol es mínima.',f:'Punto de distancia mínima al Sol'}
 ];
-
-const tiers = [
-  { name: "ÓRBITA BAJA", points: 10 },
-  { name: "ESTRATOSFERA", points: 20 },
-  { name: "LÍNEA DE KÁRMÁN", points: 30 },
-  { name: "ESTACIÓN ESPACIAL", points: 50 },
-  { name: "SALTO LUNAR", points: 80 },
-  { name: "SUPERNOVA", points: 100 }
-];
-
-const screens = {
-  home: document.getElementById("home"),
-  game: document.getElementById("game"),
-  results: document.getElementById("results")
-};
-const $ = (id) => document.getElementById(id);
-
-let current = 0;
-let score = 0;
-let altitude = 0;
-let correct = 0;
-let timeLeft = 25;
-let timerId = null;
-let locked = false;
-
-function showScreen(name) {
-  Object.values(screens).forEach(screen => screen.classList.remove("active"));
-  screens[name].classList.add("active");
-}
-
-function normalize(value) {
-  return value.toLocaleLowerCase("es").normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "").replace(/[.,!?¿¡]/g, "")
-    .replace(/\s+/g, " ").trim();
-}
-
-function startMission() {
-  current = 0; score = 0; altitude = 0; correct = 0;
-  showScreen("game");
-  loadChallenge();
-}
-
-function loadChallenge() {
-  clearInterval(timerId);
-  locked = false;
-  timeLeft = 25;
-  const challenge = challenges[current];
-  $("questionNumber").textContent = String(current + 1).padStart(2, "0");
-  $("topic").textContent = challenge.topic;
-  $("questionText").textContent = challenge.question;
-  $("timer").textContent = timeLeft;
-  $("progressBar").style.width = `${(current / challenges.length) * 100}%`;
-  $("answerInput").value = "";
-  $("answerInput").disabled = false;
-  $("feedback").textContent = "";
-  $("feedback").className = "feedback";
-  $("answerInput").focus();
-  timerId = setInterval(tick, 1000);
-}
-
-function tick() {
-  timeLeft -= 1;
-  $("timer").textContent = timeLeft;
-  if (timeLeft <= 0) {
-    clearInterval(timerId);
-    finishAnswer(false, null, true);
-  }
-}
-
-function finishAnswer(isCorrect, tier, timedOut = false) {
-  if (locked) return;
-  locked = true;
-  clearInterval(timerId);
-  $("answerInput").disabled = true;
-
-  if (isCorrect && tier) {
-    const reward = tiers[tier].points;
-    score += reward;
-    altitude += reward;
-    correct += 1;
-    $("feedback").textContent = `✓ RESPUESTA ACEPTADA · ${tiers[tier].name} · +${reward} PUNTOS`;
-    $("feedback").className = "feedback good";
-    $("altitude").textContent = altitude;
-    $("score").textContent = String(score).padStart(3, "0");
-    $("rocket").style.bottom = `${15 + Math.min(altitude / 700, 1) * 135}px`;
-  } else {
-    $("feedback").textContent = timedOut ? "TIEMPO AGOTADO · 0 PUNTOS" : "RESPUESTA NO RECONOCIDA · 0 PUNTOS";
-    $("feedback").className = "feedback bad";
-  }
-
-  $("progressBar").style.width = `${((current + 1) / challenges.length) * 100}%`;
-  setTimeout(() => {
-    current += 1;
-    if (current < challenges.length) loadChallenge();
-    else showResults();
-  }, 1500);
-}
-
-function submitAnswer(event) {
-  event.preventDefault();
-  if (locked) return;
-  const answer = normalize($("answerInput").value);
-  if (!answer) return;
-  const match = challenges[current].answers.find(item => normalize(item.text) === answer);
-  finishAnswer(Boolean(match), match ? match.tier : null);
-}
-
-function showResults() {
-  clearInterval(timerId);
-  $("finalAltitude").textContent = `${altitude} KM`;
-  $("correctCount").textContent = `${correct} / ${challenges.length}`;
-  $("finalScore").textContent = score;
-  $("resultMessage").textContent = correct === 7
-    ? "¡Excelente misión! ARIEL-1 alcanzó su máximo potencial."
-    : correct >= 4
-      ? "Buen trabajo, explorador. Cada misión te lleva más lejos."
-      : "La exploración continúa. Aprende, inténtalo de nuevo y llega más alto.";
-  showScreen("results");
-}
-
-$("startBtn").addEventListener("click", startMission);
-$("answerForm").addEventListener("submit", submitAnswer);
-$("restartBtn").addEventListener("click", startMission);
+const rankList=[{name:'CADETE',min:0,icon:'◇'},{name:'PILOTO',min:50,icon:'◈'},{name:'NAVEGANTE',min:120,icon:'✦'},{name:'COMANDANTE',min:220,icon:'◆'},{name:'ASTRONAUTA ÉLITE',min:350,icon:'✧'},{name:'EXPLORADOR CÓSMICO',min:500,icon:'★'}];
+const zones=[{name:'EARTH ORBIT',min:0},{name:'STRATOSPHERE',min:100},{name:'ORBITAL SPACE',min:300},{name:'LUNAR TERRITORY',min:500},{name:'DEEP SPACE',min:700}];
+const achievements=[{id:'first',name:'FIRST CONTACT',desc:'Completa una misión',icon:'✦',check:s=>true},{id:'perfect',name:'PERFECT ORBIT',desc:'7 respuestas correctas',icon:'★',check:s=>s.correct===7},{id:'master',name:'ROCKET MASTER',desc:'Obtén 300 puntos',icon:'🚀',check:s=>s.score>=300},{id:'deep',name:'DEEP SPACE',desc:'Supera 500 puntos',icon:'✧',check:s=>s.score>=500}];
+const screens={home:document.querySelector('#home'),game:document.querySelector('#game'),results:document.querySelector('#results')};const $=id=>document.getElementById(id);
+let mission=[],index=0,score=0,altitude=0,correct=0,timer=25,timerId=null,locked=false,readyNext=false;
+function show(name){Object.values(screens).forEach(s=>s.classList.remove('active'));screens[name].classList.add('active')}
+function clean(s){return s.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9λ/×.,+-]/g,' ').replace(/\s+/g,' ').trim()}
+function distance(a,b){const row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){let old=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=old}}return row[b.length]}
+function findAnswer(input,options){const n=clean(input);let exact=options.find(x=>clean(x[0])===n);if(exact)return exact;let candidates=options.map(x=>({x,n:clean(x[0])})).filter(x=>n.length>=6&&x.n.length>=6).map(x=>({...x,d:distance(n,x.n)})).filter(x=>x.d<=(x.n.length>10?2:1)).sort((a,b)=>a.d-b.d);return candidates.length&&!(candidates[1]&&candidates[0].d===candidates[1].d)?candidates[0].x:null}
+function rng(seed){let v=seed%2147483647;if(v<=0)v+=2147483646;return()=>((v=v*16807%2147483647)-1)/2147483646}
+function dailyQuestions(){let d=new Date(),key=`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`,seed=[...key].reduce((sum,ch)=>sum+ch.charCodeAt(0),0)*97,random=rng(seed);return [...bank].sort(()=>random()-.5).slice(0,7)}
+function zoneFor(value){return [...zones].reverse().find(z=>value>=z.min)||zones[0]}
+function start(){index=score=altitude=correct=0;mission=dailyQuestions();$('altitude').textContent='0';$('score').textContent='000';$('rocket').style.bottom='20px';$('rocket').classList.remove('boost','bump');show('game');load()}
+function load(){clearInterval(timerId);locked=readyNext=false;timer=25;const q=mission[index];$('questionNumber').textContent=String(index+1).padStart(2,'0');$('topic').textContent=q.topic;$('questionText').textContent=q.q;$('timer').textContent=timer;$('progressBar').style.width=`${index/mission.length*100}%`;$('answerInput').value='';$('answerInput').disabled=false;$('feedback').textContent='';$('feedback').className='feedback';$('explanationCard').hidden=true;$('nextBtn').hidden=true;$('submitBtn').hidden=false;$('answerInput').focus();timerId=setInterval(()=>{timer--;$('timer').textContent=timer;if(timer<=0)finish(null,true)},1000)}
+function boostRocket(){const r=$('rocket');r.classList.remove('boost');void r.offsetWidth;r.classList.add('boost');setTimeout(()=>r.classList.remove('boost'),700)}
+function finish(match,timed=false){if(locked)return;locked=true;clearInterval(timerId);$('answerInput').disabled=true;$('submitBtn').hidden=true;let q=mission[index];if(match){let pts=rarity[match[1]].points;score+=pts;altitude+=pts;correct++;$('feedback').textContent=`✓ ACEPTADA · ${rarity[match[1]].name} · +${pts}`;$('feedback').className='feedback good';$('rocket').style.bottom=`${20+Math.min(altitude/700,1)*130}px`;boostRocket()}else{$('feedback').textContent=timed?'TIEMPO AGOTADO · 0 PUNTOS':'NO RECONOCIDA · 0 PUNTOS';$('feedback').className='feedback bad';$('rocket').classList.add('bump');document.querySelector('.shell').classList.add('screen-shake');setTimeout(()=>{$('rocket').classList.remove('bump');document.querySelector('.shell').classList.remove('screen-shake')},350)}
+$('altitude').textContent=altitude;$('score').textContent=String(score).padStart(3,'0');$('zoneName').textContent=zoneFor(altitude).name;$('progressBar').style.width=`${(index+1)/mission.length*100}%`;$('correctAnswer').textContent=q.a[0][0];$('explanationText').textContent=q.e;$('formulaText').textContent=q.f;$('explanationCard').hidden=false;$('nextBtn').textContent=index===mission.length-1?'VER RESULTADOS →':'SIGUIENTE DESAFÍO →';$('nextBtn').hidden=false;readyNext=true}
+function next(){if(!readyNext)return;index++;if(index<mission.length)load();else results()}
+function results(){clearInterval(timerId);let state={score,correct},rank=[...rankList].reverse().find(r=>score>=r.min)||rankList[0],zone=zoneFor(altitude);$('finalAltitude').textContent=`${altitude} KM`;$('finalZone').textContent=zone.name;$('rankName').textContent=rank.name;$('rankIcon').textContent=rank.icon;$('correctCount').textContent=`${correct} / 7`;$('finalScore').textContent=score;$('resultMessage').textContent=correct===7?'¡Misión perfecta! ARIEL-1 alcanzó su máximo potencial.':correct>=4?'Buen trabajo, explorador. Cada misión te lleva más lejos.':'La exploración continúa. Aprende y vuelve a despegar.';
+$('achievements').innerHTML=achievements.map(a=>{let unlocked=a.check(state);return `<div class="achievement ${unlocked?'':'locked'}"><span class="badge-icon">${a.icon}</span><div><strong>${a.name}</strong><small>${unlocked?'DESBLOQUEADO':a.desc}</small></div></div>`}).join('');show('results')}
+$('startBtn').addEventListener('click',start);$('answerForm').addEventListener('submit',e=>{e.preventDefault();if(locked)return;let v=$('answerInput').value.trim();if(!v)return;finish(findAnswer(v,mission[index].a))});$('nextBtn').addEventListener('click',next);$('restartBtn').addEventListener('click',start);
