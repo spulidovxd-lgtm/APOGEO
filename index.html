@@ -22,7 +22,7 @@
         <p class="intro">Resuelve los 7 desafíos de hoy. Cada respuesta correcta impulsa a ARIEL-1 hacia el espacio.</p>
         <div class="rocket-art" aria-hidden="true">🚀</div>
         <button id="startBtn" class="primary-btn">INICIAR MISIÓN <span>→</span></button>
-        <p class="small-note">7 DESAFÍOS · 25 SEGUNDOS CADA UNO · UNA MISIÓN</p>
+        <p class="small-note">7 DESAFÍOS DIARIOS · 25 SEGUNDOS · BANCO DE 30 PREGUNTAS</p>
       </div>
       <div class="mission-card">
         <div><span class="card-label">MISIÓN</span><strong>ARIEL-1 / 001</strong></div>
@@ -45,9 +45,16 @@
           <form id="answerForm">
             <label class="sr-only" for="answerInput">Tu respuesta</label>
             <input id="answerInput" type="text" placeholder="Escribe tu respuesta..." autocomplete="off" required>
-            <button class="primary-btn submit-btn" type="submit">CONFIRMAR RESPUESTA ↗</button>
+            <button id="submitBtn" class="primary-btn submit-btn" type="submit">CONFIRMAR RESPUESTA ↗</button>
           </form>
           <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+          <div id="explanationCard" class="explanation-card" hidden>
+            <p class="explanation-label">REGISTRO DE CONOCIMIENTO</p>
+            <p class="answer-reveal">RESPUESTA: <strong id="correctAnswer"></strong></p>
+            <p id="explanationText" class="explanation-text"></p>
+            <div class="formula-box"><span>FÓRMULA / DATO</span><strong id="formulaText"></strong></div>
+            <button id="nextBtn" class="primary-btn next-btn" type="button" hidden>SIGUIENTE DESAFÍO →</button>
+          </div>
         </article>
         <aside class="telemetry">
           <div class="telemetry-title">TELEMETRÍA</div>
