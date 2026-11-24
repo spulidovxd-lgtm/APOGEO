@@ -161,3 +161,15 @@ footer { display: flex; justify-content: space-between; padding: 20px 0; border-
   .scene-stars, .rocket.launching, .rocket::after { animation: none; }
   .rocket, .scene-planet, .scene-horizon, .rocket-track { transition: none; }
 }
+
+/* Enlace para que los jugadores compartan su experiencia */
+.feedback-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 12px; padding: 12px 18px; border: 1px solid #75d9e9;
+  border-radius: 5px; color: #a9f4ff; background: #10243b;
+  font-family: Orbitron, sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-decoration: none; transition: .2s ease;
+}
+.feedback-btn:hover, .feedback-btn:focus-visible {
+  background: #193c58; border-color: #fff; color: #fff; transform: translateY(-1px);
+}
